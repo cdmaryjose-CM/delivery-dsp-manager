@@ -1,0 +1,164 @@
+{
+  "landing": {
+    "hero": {
+      "badge1": "UniUni Certified Partner",
+      "badge2": "Last-Mile Delivery Experts",
+      "title1": "Delivering Excellence.",
+      "title2": "Every Package, Every Time.",
+      "subtitle": "AUTOS MALL LLC is your trusted Delivery Service Partner. We connect packages to families with speed, care, and reliability. Join our team of professional drivers or partner with us for your delivery needs.",
+      "cta1": "Join Our Team",
+      "cta2": "Partner With Us",
+      "trust1": "Licensed & Insured",
+      "trust2": "California Based",
+      "trust3": "24/7 Support"
+    },
+    "stats": {
+      "deliveries": "Deliveries",
+      "drivers": "Active Drivers",
+      "satisfaction": "Satisfaction Rate",
+      "coverage": "Service Areas"
+    },
+    "problem": {
+      "title": "Why Choose AUTOS MALL?",
+      "subtitle": "We understand that every package tells a story. That's why we treat each delivery like it's going to our own family.",
+      "problemTitle": "Common Delivery Issues",
+      "problem1": "Late deliveries that miss time windows",
+      "problem2": "Damaged packages due to careless handling",
+      "problem3": "Poor communication and tracking",
+      "problem4": "Unreliable drivers without proper vetting",
+      "solutionTitle": "The AUTOS MALL Difference",
+      "solution1": "Real-time tracking with accurate ETAs",
+      "solution2": "Careful handling - we treat packages like our own",
+      "solution3": "Photo proof of delivery for every package",
+      "solution4": "Professional, vetted drivers you can trust"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "subtitle": "Simple, efficient, reliable. That's our promise.",
+      "step1": {
+        "title": "Package Assignment",
+        "desc": "Packages are assigned to our drivers through UniUni's smart routing system for maximum efficiency."
+      },
+      "step2": {
+        "title": "Route Optimization",
+        "desc": "Our drivers follow optimized routes to ensure on-time delivery while minimizing environmental impact."
+      },
+      "step3": {
+        "title": "Proof of Delivery",
+        "desc": "Every delivery is documented with photo proof, ensuring complete transparency and accountability."
+      }
+    },
+    "features": {
+      "title": "Our Services",
+      "subtitle": "Comprehensive delivery solutions for every need.",
+      "tracking": {
+        "title": "Real-Time Tracking",
+        "desc": "Know exactly where your package is at all times with GPS tracking."
+      },
+      "speed": {
+        "title": "Same-Day Delivery",
+        "desc": "Fast, reliable same-day delivery for urgent packages."
+      },
+      "care": {
+        "title": "Careful Handling",
+        "desc": "Every package is handled with care, from pickup to delivery."
+      },
+      "drivers": {
+        "title": "Professional Drivers",
+        "desc": "Background-checked, trained drivers who represent your brand well."
+      },
+      "support": {
+        "title": "24/7 Support",
+        "desc": "Our team is always available to help with any delivery questions."
+      },
+      "coverage": {
+        "title": "Wide Coverage",
+        "desc": "Serving major areas throughout California and beyond."
+      }
+    },
+    "drivers": {
+      "badge": "Join Our Team",
+      "title": "Become a Driver",
+      "desc": "Are you looking for flexible work with great earning potential? Join AUTOS MALL LLC as an Independent Contract Driver. Use your own vehicle, set your own schedule, and earn competitive pay per delivery.",
+      "req1": "Valid driver's license",
+      "req2": "Reliable vehicle (car, van, or SUV)",
+      "req3": "Smartphone with GPS",
+      "req4": "Clean driving record",
+      "req5": "Ability to lift up to 50 lbs",
+      "earnings": "Earnings Potential",
+      "earningsValue": "$800-$2,000/week",
+      "cta": "Apply Now"
+    },
+    "cta": {
+      "title": "Ready to Get Started?",
+      "subtitle": "Whether you're looking to join our driver team or need reliable delivery services, we're here to help.",
+      "button1": "Join as Driver",
+      "button2": "Contact Us",
+      "deliveries": "Packages delivered with care",
+      "rating": "Customer satisfaction"
+    },
+    "team": {
+      "badge": "Our Team",
+      "title": "Meet the Team",
+      "subtitle": "Family-owned and operated, we bring a personal touch to every delivery."
+    }
+  },
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "drivers": "For Drivers",
+    "contact": "Contact",
+    "about": "About Us"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "back": "Back",
+    "continue": "Continue",
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us"
+  },
+  "footer": {
+    "brand": {
+      "name": "AUTOS MALL LLC",
+      "tagline": "Delivery Service Partner",
+      "description": "Your trusted partner for last-mile delivery services. We connect packages to families with speed, care, and reliability."
+    },
+    "services": {
+      "title": "Services",
+      "sameDay": "Same-Day Delivery",
+      "residential": "Residential Delivery",
+      "commercial": "Commercial Delivery",
+      "tracking": "Package Tracking"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "careers": "Careers",
+      "contact": "Contact",
+      "partner": "Partner With Us"
+    },
+    "drivers": {
+      "title": "For Drivers",
+      "apply": "Apply Now",
+      "requirements": "Requirements",
+      "earnings": "Earnings",
+      "support": "Driver Support"
+    },
+    "stats": {
+      "deliveries": "Deliveries",
+      "rating": "Rating",
+      "drivers": "Drivers",
+      "areas": "Service Areas"
+    },
+    "bottom": {
+      "copyright": "© 2025 AUTOS MALL LLC. All rights reserved.",
+      "partner": "UniUni Certified Partner",
+      "location": "California, USA"
+    }
+  }
+}

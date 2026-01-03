@@ -1,0 +1,164 @@
+{
+  "landing": {
+    "hero": {
+      "badge1": "Socio Certificado UniUni",
+      "badge2": "Expertos en Última Milla",
+      "title1": "Entregando Excelencia.",
+      "title2": "Cada Paquete, Cada Vez.",
+      "subtitle": "AUTOS MALL LLC es tu socio de confianza para servicios de entrega. Conectamos paquetes con familias con rapidez, cuidado y confiabilidad. Únete a nuestro equipo de conductores profesionales o asóciate con nosotros.",
+      "cta1": "Únete al Equipo",
+      "cta2": "Asóciate Con Nosotros",
+      "trust1": "Licenciado y Asegurado",
+      "trust2": "Basado en California",
+      "trust3": "Soporte 24/7"
+    },
+    "stats": {
+      "deliveries": "Entregas",
+      "drivers": "Conductores Activos",
+      "satisfaction": "Tasa de Satisfacción",
+      "coverage": "Áreas de Servicio"
+    },
+    "problem": {
+      "title": "¿Por Qué Elegir AUTOS MALL?",
+      "subtitle": "Entendemos que cada paquete cuenta una historia. Por eso tratamos cada entrega como si fuera para nuestra propia familia.",
+      "problemTitle": "Problemas Comunes de Entrega",
+      "problem1": "Entregas tardías que no cumplen horarios",
+      "problem2": "Paquetes dañados por manejo descuidado",
+      "problem3": "Pobre comunicación y seguimiento",
+      "problem4": "Conductores poco confiables sin verificación",
+      "solutionTitle": "La Diferencia AUTOS MALL",
+      "solution1": "Seguimiento en tiempo real con ETAs precisos",
+      "solution2": "Manejo cuidadoso - tratamos los paquetes como propios",
+      "solution3": "Prueba fotográfica de cada entrega",
+      "solution4": "Conductores profesionales y verificados"
+    },
+    "howItWorks": {
+      "title": "Cómo Funciona",
+      "subtitle": "Simple, eficiente, confiable. Esa es nuestra promesa.",
+      "step1": {
+        "title": "Asignación de Paquetes",
+        "desc": "Los paquetes se asignan a nuestros conductores a través del sistema de rutas inteligentes de UniUni."
+      },
+      "step2": {
+        "title": "Optimización de Rutas",
+        "desc": "Nuestros conductores siguen rutas optimizadas para garantizar entregas a tiempo."
+      },
+      "step3": {
+        "title": "Prueba de Entrega",
+        "desc": "Cada entrega se documenta con prueba fotográfica para total transparencia."
+      }
+    },
+    "features": {
+      "title": "Nuestros Servicios",
+      "subtitle": "Soluciones de entrega completas para cada necesidad.",
+      "tracking": {
+        "title": "Seguimiento en Tiempo Real",
+        "desc": "Sabe exactamente dónde está su paquete con rastreo GPS."
+      },
+      "speed": {
+        "title": "Entrega el Mismo Día",
+        "desc": "Entrega rápida y confiable el mismo día para paquetes urgentes."
+      },
+      "care": {
+        "title": "Manejo Cuidadoso",
+        "desc": "Cada paquete se maneja con cuidado, desde la recogida hasta la entrega."
+      },
+      "drivers": {
+        "title": "Conductores Profesionales",
+        "desc": "Conductores verificados y capacitados que representan bien su marca."
+      },
+      "support": {
+        "title": "Soporte 24/7",
+        "desc": "Nuestro equipo siempre está disponible para ayudar."
+      },
+      "coverage": {
+        "title": "Amplia Cobertura",
+        "desc": "Sirviendo áreas principales en California y más allá."
+      }
+    },
+    "drivers": {
+      "badge": "Únete al Equipo",
+      "title": "Conviértete en Conductor",
+      "desc": "¿Buscas trabajo flexible con gran potencial de ganancias? Únete a AUTOS MALL LLC como Conductor Contratista Independiente. Usa tu propio vehículo, establece tu horario y gana pago competitivo por entrega.",
+      "req1": "Licencia de conducir válida",
+      "req2": "Vehículo confiable (auto, van o SUV)",
+      "req3": "Smartphone con GPS",
+      "req4": "Historial de manejo limpio",
+      "req5": "Capacidad de cargar hasta 50 lbs",
+      "earnings": "Potencial de Ganancias",
+      "earningsValue": "$800-$2,000/semana",
+      "cta": "Aplicar Ahora"
+    },
+    "cta": {
+      "title": "¿Listo para Comenzar?",
+      "subtitle": "Ya sea que busques unirte a nuestro equipo de conductores o necesites servicios de entrega confiables, estamos aquí para ayudar.",
+      "button1": "Unirse como Conductor",
+      "button2": "Contáctanos",
+      "deliveries": "Paquetes entregados con cuidado",
+      "rating": "Satisfacción del cliente"
+    },
+    "team": {
+      "badge": "Nuestro Equipo",
+      "title": "Conoce al Equipo",
+      "subtitle": "De propiedad y operación familiar, aportamos un toque personal a cada entrega."
+    }
+  },
+  "navigation": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "drivers": "Para Conductores",
+    "contact": "Contacto",
+    "about": "Nosotros"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "back": "Volver",
+    "continue": "Continuar",
+    "learnMore": "Saber Más",
+    "getStarted": "Comenzar",
+    "contactUs": "Contáctanos"
+  },
+  "footer": {
+    "brand": {
+      "name": "AUTOS MALL LLC",
+      "tagline": "Socio de Servicios de Entrega",
+      "description": "Tu socio de confianza para servicios de entrega de última milla. Conectamos paquetes con familias con rapidez, cuidado y confiabilidad."
+    },
+    "services": {
+      "title": "Servicios",
+      "sameDay": "Entrega el Mismo Día",
+      "residential": "Entrega Residencial",
+      "commercial": "Entrega Comercial",
+      "tracking": "Seguimiento de Paquetes"
+    },
+    "company": {
+      "title": "Empresa",
+      "about": "Nosotros",
+      "careers": "Empleos",
+      "contact": "Contacto",
+      "partner": "Asóciate Con Nosotros"
+    },
+    "drivers": {
+      "title": "Para Conductores",
+      "apply": "Aplicar Ahora",
+      "requirements": "Requisitos",
+      "earnings": "Ganancias",
+      "support": "Soporte para Conductores"
+    },
+    "stats": {
+      "deliveries": "Entregas",
+      "rating": "Calificación",
+      "drivers": "Conductores",
+      "areas": "Áreas de Servicio"
+    },
+    "bottom": {
+      "copyright": "© 2025 AUTOS MALL LLC. Todos los derechos reservados.",
+      "partner": "Socio Certificado UniUni",
+      "location": "California, EE.UU."
+    }
+  }
+}

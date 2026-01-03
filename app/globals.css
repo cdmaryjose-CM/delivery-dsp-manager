@@ -1,0 +1,319 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ====================================================
+   AUTOS MALL LLC - GLASS MORPHISM DESIGN SYSTEM
+   ==================================================== */
+
+/* CSS Variables for Theme-Aware Design */
+:root {
+  /* Light Theme - Professional & Clean */
+  --bg-primary: 255 255 255;
+  --bg-secondary: 249 250 251;
+  --bg-glass: rgba(255, 255, 255, 0.8);
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --text-primary: 17 24 39;
+  --text-secondary: 107 114 128;
+  --border-glass: rgba(226, 232, 240, 0.4);
+  --shadow-glass: rgba(0, 0, 0, 0.1);
+
+  /* AUTOS MALL LLC Brand Colors */
+  --am-navy: 30 58 95;
+  --am-orange: 245 166 35;
+  --am-green: 124 179 66;
+  --am-cream: 254 243 199;
+
+  /* Shadcn/UI base colors - Light */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --border: 214.3 31.8% 91.4%;
+
+  /* Glass Effects - Light */
+  --blur-subtle: blur(8px) saturate(120%);
+  --blur-medium: blur(16px) saturate(150%) contrast(110%);
+  --blur-strong: blur(24px) saturate(180%) contrast(120%) brightness(110%);
+  --blur-ultra: blur(32px) saturate(200%) contrast(130%) brightness(115%);
+}
+
+.dark {
+  /* Dark Theme - Professional */
+  --bg-primary: 10 14 21;
+  --bg-secondary: 17 20 29;
+  --bg-glass: rgba(15, 23, 42, 0.85);
+  --bg-card: rgba(26, 29, 41, 0.92);
+  --text-primary: 255 255 255;
+  --text-secondary: 148 163 184;
+  --border-glass: rgba(148, 163, 184, 0.2);
+  --shadow-glass: rgba(0, 0, 0, 0.4);
+
+  /* Shadcn/UI base colors - Dark */
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --border: 217.2 32.6% 17.5%;
+
+  /* Glass Effects - Dark */
+  --blur-subtle: blur(8px) saturate(120%);
+  --blur-medium: blur(16px) saturate(150%) contrast(110%);
+  --blur-strong: blur(24px) saturate(180%) contrast(120%) brightness(110%);
+  --blur-ultra: blur(32px) saturate(200%) contrast(130%) brightness(115%);
+}
+
+/* ====================================================
+   GLASS MORPHISM BASE COMPONENTS
+   ==================================================== */
+
+/* Glass Panel - Main container */
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: var(--blur-medium);
+  -webkit-backdrop-filter: var(--blur-medium);
+  border: 1px solid var(--border-glass);
+  border-radius: 1rem;
+  box-shadow:
+    0 8px 32px var(--shadow-glass),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel:hover {
+  backdrop-filter: var(--blur-strong);
+  -webkit-backdrop-filter: var(--blur-strong);
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 40px var(--shadow-glass),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Glass Card - Enhanced version */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: var(--blur-medium);
+  -webkit-backdrop-filter: var(--blur-medium);
+  border: 1px solid var(--border-glass);
+  border-radius: 0.75rem;
+  box-shadow:
+    0 4px 24px var(--shadow-glass),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  backdrop-filter: var(--blur-strong);
+  -webkit-backdrop-filter: var(--blur-strong);
+  transform: translateY(-1px);
+  box-shadow:
+    0 8px 32px var(--shadow-glass),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Glass Button */
+.glass-button {
+  background: var(--bg-glass);
+  backdrop-filter: var(--blur-medium);
+  -webkit-backdrop-filter: var(--blur-medium);
+  border: 1px solid var(--border-glass);
+  border-radius: 0.5rem;
+  color: rgb(var(--text-primary));
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s;
+}
+
+.glass-button:hover {
+  backdrop-filter: var(--blur-strong);
+  -webkit-backdrop-filter: var(--blur-strong);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px var(--shadow-glass);
+}
+
+.glass-button:hover::before {
+  left: 100%;
+}
+
+.glass-button:active {
+  transform: translateY(0);
+}
+
+/* ====================================================
+   ANIMATIONS & TRANSITIONS
+   ==================================================== */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow:
+      0 8px 32px var(--shadow-glass),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 12px 48px rgba(245, 166, 35, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ====================================================
+   RESPONSIVE DESIGN
+   ==================================================== */
+
+@media (max-width: 768px) {
+  .glass-panel,
+  .glass-card {
+    backdrop-filter: var(--blur-subtle);
+    -webkit-backdrop-filter: var(--blur-subtle);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-panel,
+  .glass-card,
+  .glass-button {
+    transition: none;
+  }
+
+  .float,
+  .pulse-glow {
+    animation: none;
+  }
+}
+
+/* ====================================================
+   THEME-AWARE BACKGROUND GRADIENTS
+   ==================================================== */
+
+/* Light theme gradient - AUTOS MALL colors */
+.theme-gradient-bg {
+  background: linear-gradient(135deg,
+    rgb(248 250 252) 0%,
+    rgb(254 243 199 / 0.3) 25%,
+    rgb(236 253 245 / 0.4) 50%,
+    rgb(239 246 255) 75%,
+    rgb(248 250 252) 100%
+  );
+}
+
+/* Dark theme gradient */
+.dark .theme-gradient-bg {
+  background: linear-gradient(135deg,
+    rgb(15 23 42) 0%,
+    rgb(30 58 95 / 0.3) 25%,
+    rgb(17 24 39) 50%,
+    rgb(30 41 59) 75%,
+    rgb(15 23 42) 100%
+  );
+}
+
+/* ====================================================
+   GLASS CRYSTAL - Works on BOTH Light and Dark modes
+   ==================================================== */
+
+.glass-crystal {
+  background: rgba(30, 58, 95, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(30, 58, 95, 0.15);
+  box-shadow:
+    0 4px 16px rgba(30, 58, 95, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-crystal:hover {
+  background: rgba(30, 58, 95, 0.12);
+  box-shadow:
+    0 8px 24px rgba(30, 58, 95, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.dark .glass-crystal {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass-crystal:hover {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* ====================================================
+   TYPOGRAPHY
+   ==================================================== */
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: rgb(var(--bg-primary));
+  color: rgb(var(--text-primary));
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Global transition for theme changes */
+*, *::before, *::after {
+  transition: background-color 0.3s ease,
+              border-color 0.3s ease,
+              color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* Disable transitions on page load to prevent flash */
+.no-transitions * {
+  transition: none !important;
+}
