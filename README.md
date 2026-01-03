@@ -13,11 +13,20 @@ Professional delivery management platform for AUTOS MALL LLC, a UniUni-certified
 
 ## Tech Stack
 
-- **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS + Glass Morphism
-- **i18n**: next-intl
+- **Framework**: Next.js 15.1 (App Router)
+- **React**: React 19.0
+- **Styling**: Tailwind CSS 3.4 + Glass Morphism
+- **i18n**: next-intl 4.6
+- **UI Components**: Radix UI
 - **Icons**: Lucide React
+- **Animations**: Framer Motion
 - **Theme**: next-themes
+- **Deployment**: Vercel
+
+## Requirements
+
+- Node.js 20.0 or higher
+- npm 10.0 or higher
 
 ## Getting Started
 
@@ -62,4 +71,8 @@ npm start
 
 ## License
 
-© 2025 AUTOS MALL LLC. All rights reserved.
+© 2026 AUTOS MALL LLC. All rights reserved.
+
+---
+
+Made by [mbxarts.com](https://mbxarts.com) - The Moon in a Box property
