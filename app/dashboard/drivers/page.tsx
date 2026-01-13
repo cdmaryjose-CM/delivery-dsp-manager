@@ -7,7 +7,6 @@ import {
   Filter,
   Phone,
   Mail,
-  MapPin,
   Star,
   MoreVertical,
   CheckCircle,

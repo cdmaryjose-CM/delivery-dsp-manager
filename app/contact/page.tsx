@@ -13,7 +13,6 @@ import {
   CheckCircle,
   ArrowLeft,
   User,
-  Building2,
   FileText,
   Globe,
   Headphones,

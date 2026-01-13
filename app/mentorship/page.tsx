@@ -6,9 +6,6 @@ import {
   ArrowLeft,
   ArrowRight,
   Users,
-  Target,
-  TrendingUp,
-  Award,
   MessageCircle,
   Calendar,
   CheckCircle,
@@ -17,7 +14,6 @@ import {
   GraduationCap,
   Phone,
   Rocket,
-  Shield,
 } from 'lucide-react';
 
 const programPhases = [
