@@ -13,7 +13,6 @@ import {
   MapPin,
   Phone,
   Camera,
-  ThumbsUp,
   AlertTriangle,
   Award,
   TrendingUp,

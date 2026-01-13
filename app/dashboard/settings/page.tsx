@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import { createClient } from '@/lib/supabase/client';
 import {
   User,
@@ -32,7 +31,6 @@ interface Profile {
 }
 
 export default function SettingsPage() {
-  const t = useTranslations('dashboard');
   const { theme, setTheme } = useTheme();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -58,11 +56,12 @@ export default function SettingsPage() {
       if (user) {
         setEmail(user.email || '');
 
-        const { data: profileData } = await supabase
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const { data: profileData } = await (supabase as any)
           .from('profiles')
           .select('*')
           .eq('user_id', user.id)
-          .single();
+          .single() as { data: Profile | null };
 
         if (profileData) {
           setProfile(profileData);
@@ -81,7 +80,8 @@ export default function SettingsPage() {
     setSaving(true);
     const supabase = createClient();
 
-    const { error } = await supabase
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error } = await (supabase as any)
       .from('profiles')
       .update({
         full_name: fullName,

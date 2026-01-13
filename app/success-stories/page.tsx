@@ -8,7 +8,6 @@ import {
   Quote,
   TrendingUp,
   DollarSign,
-  Clock,
   Award,
   Users,
   ArrowRight,
@@ -194,7 +193,7 @@ export default function SuccessStoriesPage() {
                   <div className="md:w-2/3 p-8">
                     <Quote className="w-10 h-10 text-am-orange/30 mb-4" />
                     <p className="text-xl text-gray-700 dark:text-gray-300 italic mb-8 leading-relaxed">
-                      "{story.quote}"
+                      &ldquo;{story.quote}&rdquo;
                     </p>
 
                     <div className="grid grid-cols-3 gap-4">

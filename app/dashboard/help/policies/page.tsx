@@ -7,7 +7,6 @@ import {
   FileText,
   Scale,
   Lock,
-  Eye,
   UserCheck,
   AlertCircle,
   CheckCircle,

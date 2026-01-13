@@ -1,5 +1,4 @@
 import { createClient } from '@/lib/supabase/server';
-import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import {
   Package,
@@ -139,7 +138,6 @@ function DeliveryCard({ delivery }: { delivery: Delivery }) {
 }
 
 export default async function MyDeliveriesPage() {
-  const t = await getTranslations('dashboard');
   const supabase = await createClient();
 
   // Get current user

@@ -5,17 +5,14 @@ import Link from 'next/link';
 import {
   DollarSign,
   TrendingUp,
-  Calendar,
   Download,
   ChevronLeft,
   ChevronRight,
   Package,
-  Clock,
   CheckCircle,
   Wallet,
   CreditCard,
   ArrowUpRight,
-  ArrowDownRight,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
