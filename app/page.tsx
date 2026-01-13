@@ -38,7 +38,6 @@ import {
   TrendingUp,
   Target,
   Zap,
-  Quote,
   ChevronDown,
   ChevronUp,
   Rocket,
@@ -212,18 +211,18 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
             {[
-              { icon: Package, label: t('stats.deliveries'), value: '10,000+', color: 'am-orange' },
-              { icon: Users, label: t('stats.drivers'), value: '50+', color: 'am-navy' },
-              { icon: Star, label: t('stats.satisfaction'), value: '98%', color: 'am-green' },
-              { icon: MapPin, label: t('stats.coverage'), value: '2', color: 'am-orange' },
+              { icon: Package, label: t('stats.deliveries'), color: 'am-orange', darkColor: 'am-orange' },
+              { icon: Users, label: t('stats.drivers'), color: 'am-navy', darkColor: 'am-green' },
+              { icon: Star, label: t('stats.satisfaction'), color: 'am-green', darkColor: 'am-green' },
+              { icon: MapPin, label: t('stats.coverage'), value: 'Houston, TX', color: 'am-orange', darkColor: 'am-orange' },
             ].map((stat, i) => (
               <div
                 key={i}
-                className="p-4 rounded-xl glass-crystal hover:scale-105 transition-all"
+                className="p-4 rounded-xl glass-crystal hover:scale-105 transition-all text-center"
               >
-                <stat.icon className={`w-6 h-6 text-${stat.color} mb-2`} />
-                <div className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-0.5">{stat.value}</div>
-                <div className="text-gray-500 dark:text-gray-400 text-xs">{stat.label}</div>
+                <stat.icon className={`w-8 h-8 text-${stat.color} dark:text-${stat.darkColor} mx-auto mb-2`} />
+                {stat.value && <div className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white mb-0.5">{stat.value}</div>}
+                <div className="text-gray-600 dark:text-gray-300 text-sm font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -250,8 +249,8 @@ export default function LandingPage() {
             {[
               { value: t('opportunity.stat1'), label: t('opportunity.stat1Label'), icon: DollarSign, color: 'am-orange' },
               { value: t('opportunity.stat2'), label: t('opportunity.stat2Label'), icon: TrendingUp, color: 'am-green' },
-              { value: t('opportunity.stat3'), label: t('opportunity.stat3Label'), icon: Target, color: 'am-navy' },
-              { value: t('opportunity.stat4'), label: t('opportunity.stat4Label'), icon: Rocket, color: 'am-orange' },
+              { value: t('opportunity.stat3'), label: t('opportunity.stat3Label'), icon: Target, color: 'am-orange' },
+              { value: t('opportunity.stat4'), label: t('opportunity.stat4Label'), icon: Rocket, color: 'am-green' },
             ].map((stat, i) => (
               <div key={i} className="p-6 rounded-2xl glass-crystal text-center hover:scale-105 transition-all">
                 <stat.icon className={`w-8 h-8 text-${stat.color} mx-auto mb-3`} />
@@ -338,26 +337,26 @@ export default function LandingPage() {
           {/* Elevation Levels */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { level: 1, icon: Truck, color: 'am-navy', bgGradient: 'from-am-navy/10 to-am-navy/5' },
-              { level: 2, icon: Users, color: 'am-orange', bgGradient: 'from-am-orange/10 to-am-orange/5' },
-              { level: 3, icon: Briefcase, color: 'am-green', bgGradient: 'from-am-green/10 to-am-green/5' },
-              { level: 4, icon: Building2, color: 'am-orange', bgGradient: 'from-am-orange/20 to-am-navy/10' },
+              { level: 1, icon: Truck, color: 'am-navy', darkColor: 'blue-400', bgGradient: 'from-am-navy/10 to-am-navy/5' },
+              { level: 2, icon: Users, color: 'am-orange', darkColor: 'am-orange', bgGradient: 'from-am-orange/10 to-am-orange/5' },
+              { level: 3, icon: Briefcase, color: 'am-green', darkColor: 'am-green', bgGradient: 'from-am-green/10 to-am-green/5' },
+              { level: 4, icon: Building2, color: 'am-orange', darkColor: 'am-orange', bgGradient: 'from-am-orange/20 to-am-navy/10' },
             ].map((item, i) => (
               <div
                 key={i}
-                className={`relative p-6 rounded-2xl bg-gradient-to-br ${item.bgGradient} border border-${item.color}/20 dark:border-${item.color}/30 hover:scale-[1.02] transition-all group`}
+                className={`relative p-6 rounded-2xl bg-gradient-to-br ${item.bgGradient} border border-${item.color}/20 dark:border-${item.darkColor}/30 hover:scale-[1.02] transition-all group`}
               >
                 {/* Level indicator */}
-                <div className={`absolute -top-3 -left-3 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shadow-lg bg-${item.color} text-white`}>
+                <div className={`absolute -top-3 -left-3 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shadow-lg bg-${item.color} dark:bg-${item.darkColor} text-white`}>
                   {item.level}
                 </div>
 
                 <div className="mt-4">
-                  <item.icon className={`w-10 h-10 text-${item.color} mb-3`} />
+                  <item.icon className={`w-10 h-10 text-${item.color} dark:text-${item.darkColor} mb-3`} />
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
                     {t(`elevation.level${item.level}.name`)}
                   </h3>
-                  <div className={`text-xs font-medium text-${item.color} mb-2`}>
+                  <div className={`text-xs font-medium text-${item.color} dark:text-${item.darkColor} mb-2`}>
                     {t(`elevation.level${item.level}.timeline`)}
                   </div>
                   <div className="text-lg font-bold text-am-green mb-3">
@@ -410,9 +409,9 @@ export default function LandingPage() {
 
           <div className="grid lg:grid-cols-3 gap-6">
             {[
-              { step: 1, icon: Brain, color: 'am-navy', title: t('howItWorks.step1.title'), desc: t('howItWorks.step1.desc') },
-              { step: 2, icon: Heart, color: 'am-orange', title: t('howItWorks.step2.title'), desc: t('howItWorks.step2.desc') },
-              { step: 3, icon: Zap, color: 'am-green', title: t('howItWorks.step3.title'), desc: t('howItWorks.step3.desc') },
+              { step: 1, icon: Brain, color: 'am-navy', darkColor: 'blue-400', title: t('howItWorks.step1.title'), desc: t('howItWorks.step1.desc') },
+              { step: 2, icon: Heart, color: 'am-orange', darkColor: 'am-orange', title: t('howItWorks.step2.title'), desc: t('howItWorks.step2.desc') },
+              { step: 3, icon: Zap, color: 'am-green', darkColor: 'am-green', title: t('howItWorks.step3.title'), desc: t('howItWorks.step3.desc') },
             ].map((item, i) => (
               <div key={i} className="relative group">
                 {/* Connector line */}
@@ -422,66 +421,16 @@ export default function LandingPage() {
 
                 <div className="relative z-10 p-6 rounded-2xl glass-crystal hover:scale-[1.02] transition-all">
                   {/* Step number */}
-                  <div className={`absolute -top-3 -left-3 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shadow-lg bg-${item.color} text-white`}>
+                  <div className={`absolute -top-3 -left-3 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shadow-lg bg-${item.color} dark:bg-${item.darkColor} text-white`}>
                     {item.step}
                   </div>
 
-                  <div className={`p-3 bg-${item.color}/10 dark:bg-${item.color}/20 rounded-xl w-fit mb-4 mt-2`}>
-                    <item.icon className={`w-6 h-6 text-${item.color}`} />
+                  <div className={`p-3 bg-${item.color}/10 dark:bg-${item.darkColor}/20 rounded-xl w-fit mb-4 mt-2`}>
+                    <item.icon className={`w-6 h-6 text-${item.color} dark:text-${item.darkColor}`} />
                   </div>
 
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{item.title}</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS SECTION */}
-      <section className="relative py-16 px-4 bg-gradient-to-b from-transparent via-am-green/5 dark:via-am-green/10 to-transparent">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-am-green/10 dark:bg-am-green/20 rounded-full mb-4">
-              <Star className="w-4 h-4 text-am-green" />
-              <span className="text-sm font-medium text-am-green">{t('testimonials.badge')}</span>
-            </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              {t('testimonials.title')}
-            </h2>
-            <p className="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              {t('testimonials.subtitle')}
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="p-6 rounded-2xl glass-crystal hover:scale-[1.02] transition-all">
-                <Quote className="w-8 h-8 text-am-orange/50 mb-4" />
-                <p className="text-sm text-gray-700 dark:text-gray-300 mb-6 italic leading-relaxed">
-                  &quot;{t(`testimonials.testimonial${i}.quote`)}&quot;
-                </p>
-                <div className="border-t border-gray-200 dark:border-white/10 pt-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-am-navy to-am-orange flex items-center justify-center text-white font-bold">
-                      {t(`testimonials.testimonial${i}.name`).charAt(0)}
-                    </div>
-                    <div>
-                      <div className="font-bold text-gray-900 dark:text-white">
-                        {t(`testimonials.testimonial${i}.name`)}
-                      </div>
-                      <div className="text-xs text-am-orange font-medium">
-                        {t(`testimonials.testimonial${i}.role`)}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-3 inline-flex items-center gap-1 px-3 py-1 bg-am-green/10 rounded-full">
-                    <CheckCircle2 className="w-3 h-3 text-am-green" />
-                    <span className="text-xs font-medium text-am-green">
-                      {t(`testimonials.testimonial${i}.result`)}
-                    </span>
-                  </div>
                 </div>
               </div>
             ))}
@@ -503,19 +452,19 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { icon: MapPin, title: t('features.tracking.title'), desc: t('features.tracking.desc'), color: 'am-navy' },
-              { icon: DollarSign, title: t('features.speed.title'), desc: t('features.speed.desc'), color: 'am-orange' },
-              { icon: Heart, title: t('features.care.title'), desc: t('features.care.desc'), color: 'am-green' },
-              { icon: Award, title: t('features.drivers.title'), desc: t('features.drivers.desc'), color: 'am-navy' },
-              { icon: Headphones, title: t('features.support.title'), desc: t('features.support.desc'), color: 'am-orange' },
-              { icon: Navigation, title: t('features.coverage.title'), desc: t('features.coverage.desc'), color: 'am-green' },
+              { icon: MapPin, title: t('features.tracking.title'), desc: t('features.tracking.desc'), color: 'am-navy', darkColor: 'blue-400' },
+              { icon: DollarSign, title: t('features.speed.title'), desc: t('features.speed.desc'), color: 'am-orange', darkColor: 'am-orange' },
+              { icon: Heart, title: t('features.care.title'), desc: t('features.care.desc'), color: 'am-green', darkColor: 'am-green' },
+              { icon: Award, title: t('features.drivers.title'), desc: t('features.drivers.desc'), color: 'am-navy', darkColor: 'blue-400' },
+              { icon: Headphones, title: t('features.support.title'), desc: t('features.support.desc'), color: 'am-orange', darkColor: 'am-orange' },
+              { icon: Navigation, title: t('features.coverage.title'), desc: t('features.coverage.desc'), color: 'am-green', darkColor: 'am-green' },
             ].map((feature, i) => (
               <div
                 key={i}
                 className="p-5 rounded-xl glass-crystal hover:scale-105 transition-all"
               >
-                <div className={`p-2 bg-${feature.color}/10 dark:bg-${feature.color}/20 rounded-lg w-fit mb-3`}>
-                  <feature.icon className={`w-5 h-5 text-${feature.color}`} />
+                <div className={`p-2 bg-${feature.color}/10 dark:bg-${feature.darkColor}/20 rounded-lg w-fit mb-3`}>
+                  <feature.icon className={`w-5 h-5 text-${feature.color} dark:text-${feature.darkColor}`} />
                 </div>
                 <h3 className="text-base font-bold text-gray-900 dark:text-white mb-1">{feature.title}</h3>
                 <p className="text-xs text-gray-600 dark:text-gray-400">{feature.desc}</p>
@@ -675,13 +624,11 @@ export default function LandingPage() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-gray-500 dark:text-gray-400">
             <div className="flex items-center gap-2">
               <Users className="w-5 h-5 text-am-orange" />
-              <span className="text-sm">50+ {t('cta.deliveries')}</span>
+              <span className="text-sm">{t('cta.deliveries')}</span>
             </div>
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-              ))}
-              <span className="text-sm ml-1">4.9/5 {t('cta.rating')}</span>
+            <div className="flex items-center gap-2">
+              <Heart className="w-5 h-5 text-am-green" />
+              <span className="text-sm">{t('cta.rating')}</span>
             </div>
           </div>
         </div>

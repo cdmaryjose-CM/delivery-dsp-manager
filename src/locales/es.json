@@ -1,7 +1,7 @@
 {
   "landing": {
     "hero": {
-      "badge1": "Socio Certificado UniUni",
+      "badge1": "Empresa en Crecimiento",
       "badge2": "Fábrica de Emprendedores",
       "title1": "De Conductor",
       "title2": "A Dueño de Tu Destino.",
@@ -13,10 +13,10 @@
       "trust3": "Sistema Probado"
     },
     "stats": {
-      "deliveries": "Paquetes Entregados",
-      "drivers": "Futuros Empresarios",
-      "satisfaction": "Tasa de Éxito",
-      "coverage": "Estados Cubiertos"
+      "deliveries": "Entregas y Creciendo",
+      "drivers": "Equipo en Expansión",
+      "satisfaction": "Compromiso Total",
+      "coverage": "Ubicación"
     },
     "opportunity": {
       "badge": "La Oportunidad",
@@ -83,16 +83,16 @@
       "title": "Cómo Sucede la Transformación",
       "subtitle": "Cada paso está diseñado para elevarte. Nada es por accidente.",
       "step1": {
-        "title": "Rutas Optimizadas por IA",
-        "desc": "Nuestro algoritmo RouteGenius asegura 98% de puntualidad mientras maximiza tus ganancias por hora. Trabajas más inteligente, no más duro."
+        "title": "Rutas Optimizadas por Tecnología",
+        "desc": "Nuestro sistema de rutas inteligentes maximiza tu puntualidad y tus ganancias por hora. Trabajas más inteligente, no más duro."
       },
       "step2": {
         "title": "Mentoría Personalizada",
-        "desc": "Desde el día uno, te emparejamos con un mentor que ya recorrió el camino. Guía real de historias de éxito reales."
+        "desc": "Desde el día uno, te conectamos con personas que ya recorrieron el camino. Guía real basada en experiencia real."
       },
       "step3": {
         "title": "Crecimiento Acelerado",
-        "desc": "Nuestro sistema MotivAI rastrea tus metas y personaliza tu camino. Desafíos diarios, victorias semanales, hitos mensuales."
+        "desc": "Nuestro sistema rastrea tu progreso y personaliza tu camino. Desafíos diarios, victorias semanales, hitos mensuales."
       }
     },
     "features": {
@@ -147,7 +147,7 @@
       }
     },
     "drivers": {
-      "badge": "Cupos Limitados",
+      "badge": "Únete al Equipo",
       "title": "Tu Transformación Comienza Aquí",
       "desc": "Deja de cambiar tiempo por dinero. Empieza a construir algo propio. Buscamos personas ambiciosas listas para tomar control de su futuro financiero.",
       "req1": "Licencia de conducir válida",
@@ -158,31 +158,31 @@
       "earnings": "Potencial Inicial",
       "earningsValue": "$800-$2,000/semana",
       "benefits": {
-        "benefit1": "Horario flexible (5am-7pm)",
+        "benefit1": "Horario flexible que tú controlas",
         "benefit2": "Depósito directo semanal",
         "benefit3": "Mentor asignado desde el día 1",
         "benefit4": "Camino hacia ser dueño de negocio"
       },
-      "cta": "Aplicar Ahora - Cupos Limitados",
-      "urgency": "Solo aceptamos 10 nuevos colaboradores este mes"
+      "cta": "Aplicar Ahora",
+      "urgency": "Buscamos personas comprometidas con su crecimiento"
     },
     "cta": {
       "title": "La Pregunta No Es Si Puedes Hacerlo",
       "subtitle": "La pregunta es: ¿Lo intentarás? Cada día que esperas es un día que alguien más está construyendo lo que podría ser tuyo.",
       "button1": "Comenzar Mi Camino",
       "button2": "Tengo Preguntas",
-      "deliveries": "Vidas transformadas",
-      "rating": "Satisfacción promedio"
+      "deliveries": "Equipo comprometido",
+      "rating": "Con tu éxito"
     },
     "faq": {
       "badge": "Preguntas Frecuentes",
       "title": "¿Aún Tienes Dudas?",
-      "q1": "¿Es demasiado bueno para ser verdad?",
-      "a1": "Entendemos el escepticismo. Por eso no pedimos fe—mostramos resultados. Aquí hay testimonios reales de personas reales que puedes verificar. Y comenzar no te cuesta nada.",
+      "q1": "¿Esto es real?",
+      "a1": "Absolutamente. Somos una empresa legalmente establecida en Texas, trabajando para convertirnos en socios de UniUni en el mercado de última milla. Te invitamos a conocernos, hacer preguntas, y ser parte de este crecimiento desde el inicio.",
       "q2": "¿Qué pasa si no funciona para mí?",
       "a2": "El sistema funciona si tú trabajas. No prometemos dinero fácil. Prometemos que si te esfuerzas, tendrás un camino claro hacia algo más grande. Ningún contrato te ata.",
       "q3": "Ya probé delivery antes y no me fue bien",
-      "a3": "La diferencia es que antes estabas solo. Aquí tienes tecnología optimizando tus rutas, una comunidad apoyándote, y un mentor que ya recorrió el camino.",
+      "a3": "La diferencia es que antes estabas solo. Aquí tienes tecnología optimizando tus rutas, una comunidad apoyándote, y personas con experiencia guiándote.",
       "q4": "¿Necesito dinero para invertir?",
       "a4": "Nada para empezar como Colaborador. Usa tu vehículo actual, gana desde el día uno. Solo cuando estés listo para crecer hablamos de inversiones. Todo es gradual."
     },
@@ -251,8 +251,8 @@
     },
     "bottom": {
       "copyright": "© 2025 AUTOS MALL LLC. Todos los derechos reservados.",
-      "partner": "Socio Certificado UniUni",
-      "location": "Texas y California, EE.UU."
+      "partner": "Construyendo el Futuro de la Logística",
+      "location": "Houston, Texas, EE.UU."
     }
   },
   "auth": {

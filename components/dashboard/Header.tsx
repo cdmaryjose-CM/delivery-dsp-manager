@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import type { User } from '@supabase/supabase-js';
@@ -68,14 +69,12 @@ export function DashboardHeader({ user, profile }: HeaderProps) {
 
           {/* Search */}
           <div className="hidden sm:flex items-center">
-            <div className="relative">
+            <Link href="/coming-soon" className="relative block">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder={t('header.search')}
-                className="w-64 pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-am-navy dark:focus:ring-am-orange text-gray-900 dark:text-white placeholder-gray-400"
-              />
-            </div>
+              <div className="w-64 pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm text-gray-400 cursor-pointer hover:border-am-navy dark:hover:border-am-orange transition-colors">
+                {t('header.search')}
+              </div>
+            </Link>
           </div>
         </div>
 
@@ -88,10 +87,10 @@ export function DashboardHeader({ user, profile }: HeaderProps) {
           </div>
 
           {/* Notifications */}
-          <button className="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+          <Link href="/coming-soon" className="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
             <Bell className="w-5 h-5 text-gray-600 dark:text-gray-300" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-am-orange rounded-full" />
-          </button>
+          </Link>
 
           {/* User menu */}
           <div className="relative">
@@ -129,13 +128,13 @@ export function DashboardHeader({ user, profile }: HeaderProps) {
                       {user.email}
                     </p>
                   </div>
-                  <a
-                    href="/dashboard/profile"
+                  <Link
+                    href="/coming-soon"
                     className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                   >
                     <UserIcon className="w-4 h-4" />
                     {t('header.profile')}
-                  </a>
+                  </Link>
                   <a
                     href="/dashboard/settings"
                     className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"

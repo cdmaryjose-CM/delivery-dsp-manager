@@ -148,9 +148,9 @@ export function DashboardSidebar({ user, profile }: SidebarProps) {
       >
         {/* Logo */}
         <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200 dark:border-gray-700">
-          <Link href="/dashboard" className="flex items-center flex-1 min-w-0">
+          <Link href="/" className="flex items-center flex-1 min-w-0">
             {collapsed ? (
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm border border-gray-100 overflow-hidden">
+              <div className="w-10 h-10 bg-white/50 dark:bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center border border-gray-200 dark:border-white/20 overflow-hidden hover:bg-white/70 dark:hover:bg-white/20 transition-colors">
                 <Image
                   src="/logo_amall.PNG"
                   alt="AM"
@@ -160,7 +160,7 @@ export function DashboardSidebar({ user, profile }: SidebarProps) {
                 />
               </div>
             ) : (
-              <div className="bg-white rounded-lg p-1.5 shadow-sm border border-gray-100">
+              <div className="bg-white/50 dark:bg-white/10 backdrop-blur-sm rounded-lg p-1.5 border border-gray-200 dark:border-white/20 hover:bg-white/70 dark:hover:bg-white/20 transition-colors">
                 <Image
                   src="/logo_amall.PNG"
                   alt="AUTOS MALL LLC"

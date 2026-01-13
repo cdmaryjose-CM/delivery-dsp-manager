@@ -1,7 +1,7 @@
 {
   "landing": {
     "hero": {
-      "badge1": "UniUni Certified Partner",
+      "badge1": "Growing Company",
       "badge2": "Entrepreneur Factory",
       "title1": "From Driver",
       "title2": "To Business Owner.",
@@ -13,10 +13,10 @@
       "trust3": "Proven System"
     },
     "stats": {
-      "deliveries": "Packages Delivered",
-      "drivers": "Future Entrepreneurs",
-      "satisfaction": "Success Rate",
-      "coverage": "States Covered"
+      "deliveries": "Deliveries & Growing",
+      "drivers": "Expanding Team",
+      "satisfaction": "Total Commitment",
+      "coverage": "Location"
     },
     "opportunity": {
       "badge": "The Opportunity",
@@ -83,16 +83,16 @@
       "title": "How the Transformation Happens",
       "subtitle": "Every step is designed to elevate you. Nothing is by accident.",
       "step1": {
-        "title": "AI-Optimized Routes",
-        "desc": "Our RouteGenius algorithm ensures 98% on-time delivery while maximizing your earnings per hour. You work smarter, not harder."
+        "title": "Technology-Optimized Routes",
+        "desc": "Our smart routing system maximizes your on-time delivery and your earnings per hour. You work smarter, not harder."
       },
       "step2": {
         "title": "Personalized Mentorship",
-        "desc": "From day one, you're matched with a mentor who's already walked the path. Real guidance from real success stories."
+        "desc": "From day one, we connect you with people who've already walked the path. Real guidance based on real experience."
       },
       "step3": {
         "title": "Accelerated Growth",
-        "desc": "Our MotivAI system tracks your goals and personalizes your journey. Daily challenges, weekly wins, monthly milestones."
+        "desc": "Our system tracks your progress and personalizes your journey. Daily challenges, weekly wins, monthly milestones."
       }
     },
     "features": {
@@ -147,7 +147,7 @@
       }
     },
     "drivers": {
-      "badge": "Limited Spots Available",
+      "badge": "Join the Team",
       "title": "Your Transformation Starts Here",
       "desc": "Stop trading time for money. Start building something of your own. We're looking for ambitious people ready to take control of their financial future.",
       "req1": "Valid driver's license",
@@ -158,31 +158,31 @@
       "earnings": "Starting Potential",
       "earningsValue": "$800-$2,000/week",
       "benefits": {
-        "benefit1": "Flexible schedule (5am-7pm)",
+        "benefit1": "Flexible schedule you control",
         "benefit2": "Weekly direct deposit",
         "benefit3": "Assigned mentor from day 1",
         "benefit4": "Path to business ownership"
       },
-      "cta": "Apply Now - Limited Spots",
-      "urgency": "Only accepting 10 new collaborators this month"
+      "cta": "Apply Now",
+      "urgency": "Looking for people committed to their growth"
     },
     "cta": {
       "title": "The Question Isn't If You Can Do It",
       "subtitle": "The question is: Will you try? Every day you wait is a day someone else is building what could be yours.",
       "button1": "Start My Journey",
       "button2": "I Have Questions",
-      "deliveries": "Lives transformed",
-      "rating": "Average satisfaction"
+      "deliveries": "Committed team",
+      "rating": "To your success"
     },
     "faq": {
       "badge": "Common Questions",
       "title": "Still Have Doubts?",
-      "q1": "Is this too good to be true?",
-      "a1": "We understand the skepticism. That's why we don't ask for faith—we show results. Here are real testimonials from real people you can verify. And getting started costs you nothing.",
+      "q1": "Is this for real?",
+      "a1": "Absolutely. We're a legally established company in Texas, working to become UniUni partners in the last-mile market. We invite you to meet us, ask questions, and be part of this growth from the beginning.",
       "q2": "What if it doesn't work for me?",
       "a2": "The system works if you work. We don't promise easy money. We promise that if you put in the effort, you'll have a clear path to something bigger. No contracts tie you down.",
       "q3": "I've tried delivery before and it didn't work",
-      "a3": "The difference is you were alone before. Here you have technology optimizing your routes, a community supporting you, and a mentor who's already walked the path.",
+      "a3": "The difference is you were alone before. Here you have technology optimizing your routes, a community supporting you, and experienced people guiding you.",
       "q4": "Do I need money to invest?",
       "a4": "Nothing to start as a Collaborator. Use your current vehicle, earn from day one. Only when you're ready to grow do we talk about investments. Everything is gradual."
     },
@@ -251,8 +251,8 @@
     },
     "bottom": {
       "copyright": "© 2025 AUTOS MALL LLC. All rights reserved.",
-      "partner": "UniUni Certified Partner",
-      "location": "Texas & California, USA"
+      "partner": "Building the Future of Logistics",
+      "location": "Houston, Texas, USA"
     }
   },
   "auth": {

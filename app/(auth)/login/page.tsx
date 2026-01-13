@@ -64,7 +64,7 @@ export default function LoginPage() {
           {/* Logo */}
           <div className="flex justify-center mb-6">
             <Link href="/" className="block">
-              <div className="bg-white rounded-xl p-3 shadow-lg">
+              <div className="bg-white/50 dark:bg-white/10 backdrop-blur-sm border border-gray-200 dark:border-white/20 rounded-xl p-3 shadow-lg">
                 <Image
                   src="/logo_amall.PNG"
                   alt="AUTOS MALL LLC"

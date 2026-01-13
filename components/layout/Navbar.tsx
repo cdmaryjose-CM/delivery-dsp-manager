@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
-import { Menu, X, Truck, LogIn } from 'lucide-react';
+import { Menu, X, Truck, LogIn, Phone } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,11 +51,18 @@ export const Navbar: React.FC = () => {
               {t('drivers')}
             </Link>
             <Link
-              href="#contact"
+              href="/contact"
               className="text-gray-600 dark:text-gray-300 hover:text-am-navy dark:hover:text-am-orange transition-colors text-sm font-medium"
             >
               {t('contact')}
             </Link>
+            <a
+              href="tel:+13466971041"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-am-green/10 dark:bg-am-green/20 text-am-green rounded-full text-sm font-medium hover:bg-am-green/20 dark:hover:bg-am-green/30 transition-colors"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              (346) 697-1041
+            </a>
           </div>
 
           {/* Right Side - Controls */}
@@ -122,12 +129,19 @@ export const Navbar: React.FC = () => {
                 {t('drivers')}
               </Link>
               <Link
-                href="#contact"
+                href="/contact"
                 className="px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t('contact')}
               </Link>
+              <a
+                href="tel:+13466971041"
+                className="mx-4 flex items-center justify-center gap-2 px-4 py-2.5 bg-am-green/10 dark:bg-am-green/20 text-am-green rounded-lg font-medium text-sm hover:bg-am-green/20 dark:hover:bg-am-green/30 transition-colors"
+              >
+                <Phone className="w-4 h-4" />
+                (346) 697-1041
+              </a>
 
               <div className="flex items-center space-x-2 px-4 pt-2">
                 <LanguageToggle />
