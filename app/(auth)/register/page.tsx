@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { createClient } from '@/lib/supabase/client';
-import { Mail, Lock, Eye, EyeOff, Loader2, User, Truck } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, Loader2, User, Truck, Phone, CheckCircle } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
 
@@ -18,18 +18,133 @@ export default function RegisterPage() {
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // Phone verification states
+  const [verificationCode, setVerificationCode] = useState('');
+  const [codeSent, setCodeSent] = useState(false);
+  const [phoneVerified, setPhoneVerified] = useState(false);
+  const [sendingCode, setSendingCode] = useState(false);
+  const [verifyingCode, setVerifyingCode] = useState(false);
+  const [countdown, setCountdown] = useState(0);
+  const [generatedCode, setGeneratedCode] = useState('');
+
+  // Countdown timer for resend
+  useEffect(() => {
+    if (countdown > 0) {
+      const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [countdown]);
+
+  // Format phone number as user types
+  const formatPhoneNumber = (value: string) => {
+    // Remove all non-digits
+    const digits = value.replace(/\D/g, '');
+
+    // Format as (XXX) XXX-XXXX
+    if (digits.length <= 3) {
+      return digits;
+    } else if (digits.length <= 6) {
+      return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+    } else {
+      return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
+    }
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setPhone(formatted);
+    // Reset verification if phone changes
+    if (phoneVerified) {
+      setPhoneVerified(false);
+      setCodeSent(false);
+      setVerificationCode('');
+    }
+  };
+
+  const isValidPhone = () => {
+    const digits = phone.replace(/\D/g, '');
+    return digits.length === 10;
+  };
+
+  const sendVerificationCode = async () => {
+    if (!isValidPhone()) {
+      setError(t('register.phoneInvalid'));
+      return;
+    }
+
+    setSendingCode(true);
+    setError('');
+
+    try {
+      // Generate a 6-digit code
+      const code = Math.floor(100000 + Math.random() * 900000).toString();
+      setGeneratedCode(code);
+
+      // In production, this would send SMS via Twilio or similar service
+      // For now, we'll simulate sending and show the code in console for testing
+      console.log(`Verification code for ${phone}: ${code}`);
+
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      setCodeSent(true);
+      setCountdown(60); // 60 seconds before can resend
+
+      // Show success message (in production, remove the code display)
+      alert(`Código de verificación enviado: ${code}\n(En producción, esto se enviará por SMS)`);
+    } catch {
+      setError('Error al enviar el código');
+    } finally {
+      setSendingCode(false);
+    }
+  };
+
+  const verifyCode = async () => {
+    if (verificationCode.length !== 6) {
+      setError(t('register.invalidCode'));
+      return;
+    }
+
+    setVerifyingCode(true);
+    setError('');
+
+    try {
+      // Simulate verification delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      if (verificationCode === generatedCode) {
+        setPhoneVerified(true);
+        setCodeSent(false);
+      } else {
+        setError(t('register.invalidCode'));
+      }
+    } catch {
+      setError(t('register.invalidCode'));
+    } finally {
+      setVerifyingCode(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
-    // Validar passwords
+    // Validate phone verification
+    if (!phoneVerified) {
+      setError(t('register.phoneRequired'));
+      setLoading(false);
+      return;
+    }
+
+    // Validate passwords
     if (password !== confirmPassword) {
       setError(t('register.passwordMismatch'));
       setLoading(false);
@@ -44,12 +159,17 @@ export default function RegisterPage() {
 
     const supabase = createClient();
 
+    // Get only digits for storage
+    const phoneDigits = phone.replace(/\D/g, '');
+
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
           full_name: fullName,
+          phone: phoneDigits,
+          phone_verified: true,
           is_driver_signup: isDriverSignup,
         },
       },
@@ -159,6 +279,77 @@ export default function RegisterPage() {
               </div>
             </div>
 
+            {/* Phone with verification */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                {t('register.phone')}
+              </label>
+              <div className="relative">
+                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={handlePhoneChange}
+                  placeholder={t('register.phonePlaceholder')}
+                  required
+                  disabled={phoneVerified}
+                  className="w-full pl-10 pr-24 py-3 bg-white/50 dark:bg-white/10 border border-gray-200 dark:border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-am-navy dark:focus:ring-am-orange text-gray-900 dark:text-white placeholder-gray-400 disabled:opacity-60"
+                />
+                {phoneVerified ? (
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-green-500">
+                    <CheckCircle className="w-5 h-5" />
+                    <span className="text-xs font-medium">{t('register.phoneVerified')}</span>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={sendVerificationCode}
+                    disabled={!isValidPhone() || sendingCode || countdown > 0}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-am-navy dark:bg-am-orange text-white text-xs font-medium rounded-md hover:bg-am-navy-light dark:hover:bg-am-orange-light disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    {sendingCode ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : countdown > 0 ? (
+                      `${countdown}s`
+                    ) : (
+                      t('register.sendCode')
+                    )}
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Verification Code Input */}
+            {codeSent && !phoneVerified && (
+              <div className="p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg space-y-3">
+                <p className="text-sm text-blue-600 dark:text-blue-400">
+                  {t('register.codeSent')}
+                </p>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={verificationCode}
+                    onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    placeholder={t('register.verificationCodePlaceholder')}
+                    maxLength={6}
+                    className="flex-1 px-4 py-2 bg-white/50 dark:bg-white/10 border border-gray-200 dark:border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-am-navy dark:focus:ring-am-orange text-gray-900 dark:text-white placeholder-gray-400 text-center text-lg tracking-widest"
+                  />
+                  <button
+                    type="button"
+                    onClick={verifyCode}
+                    disabled={verificationCode.length !== 6 || verifyingCode}
+                    className="px-4 py-2 bg-am-green text-white font-medium rounded-lg hover:bg-am-green-light disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                  >
+                    {verifyingCode ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      t('register.verifyCode')
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
+
             {/* Password */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
@@ -225,7 +416,7 @@ export default function RegisterPage() {
             {/* Submit button */}
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || !phoneVerified}
               className="w-full py-3 bg-gradient-to-r from-am-green to-am-green-light text-white rounded-lg font-semibold hover:from-am-green-light hover:to-am-green transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {loading ? (

@@ -297,7 +297,24 @@
       "loginLink": "Inicia sesión",
       "backToHome": "Volver al inicio",
       "passwordMismatch": "Las contraseñas no coinciden",
-      "passwordTooShort": "La contraseña debe tener al menos 6 caracteres"
+      "passwordTooShort": "La contraseña debe tener al menos 6 caracteres",
+      "phone": "Número de Teléfono",
+      "phonePlaceholder": "Ingresa tu número de teléfono",
+      "phoneRequired": "El número de teléfono es requerido",
+      "phoneInvalid": "Número de teléfono inválido",
+      "sendCode": "Enviar Código",
+      "sendingCode": "Enviando...",
+      "verifyPhone": "Verificar Teléfono",
+      "verificationCode": "Código de Verificación",
+      "verificationCodePlaceholder": "Ingresa el código de 6 dígitos",
+      "verifyCode": "Verificar Código",
+      "verifying": "Verificando...",
+      "phoneVerified": "Teléfono verificado",
+      "codeExpired": "El código ha expirado, solicita uno nuevo",
+      "invalidCode": "Código inválido, intenta de nuevo",
+      "codeSent": "Código enviado a tu teléfono",
+      "resendCode": "Reenviar código",
+      "resendIn": "Reenviar en {seconds}s"
     }
   },
   "dashboard": {
