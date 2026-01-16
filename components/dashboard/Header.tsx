@@ -16,6 +16,7 @@ import {
   User as UserIcon,
   Settings,
   ChevronDown,
+  Home,
 } from 'lucide-react';
 
 interface Profile {
@@ -143,6 +144,13 @@ export function DashboardHeader({ user, profile }: HeaderProps) {
                     {t('header.settings')}
                   </a>
                   <div className="border-t border-gray-200 dark:border-gray-700 mt-1 pt-1">
+                    <Link
+                      href="/"
+                      className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      <Home className="w-4 h-4" />
+                      {t('header.goToHome')}
+                    </Link>
                     <button
                       onClick={handleSignOut}
                       className="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20"

@@ -20,6 +20,7 @@ import {
   MapPin,
   FileText,
   Car,
+  Home,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -124,6 +125,11 @@ export function DashboardSidebar({ user, profile }: SidebarProps) {
   const navItems = getNavItems();
 
   const bottomItems = [
+    {
+      label: t('nav.home'),
+      href: '/',
+      icon: Home,
+    },
     {
       label: t('nav.settings'),
       href: '/dashboard/settings',

@@ -337,12 +337,14 @@
       "myVehicle": "Mi Vehículo",
       "myDocuments": "Mis Documentos",
       "settings": "Configuración",
-      "help": "Ayuda y Soporte"
+      "help": "Ayuda y Soporte",
+      "home": "Ir al Inicio"
     },
     "header": {
       "search": "Buscar...",
       "profile": "Mi Perfil",
       "settings": "Configuración",
+      "goToHome": "Ir al Inicio",
       "signOut": "Cerrar Sesión"
     },
     "overview": {
