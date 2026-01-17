@@ -69,6 +69,7 @@ export default function ProfilePage() {
 
       if (user) {
         setEmail(user.email || '');
+        const metadata = user.user_metadata || {};
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const { data: profileData } = await (supabase as any)
@@ -82,27 +83,44 @@ export default function ProfilePage() {
           setFullName(profileData.full_name || '');
           setPhone(profileData.phone || '');
           setAddress(profileData.address || '');
+        } else {
+          // No profile exists, use metadata from auth
+          const tempProfile: Profile = {
+            id: '',
+            user_id: user.id,
+            full_name: metadata.full_name || null,
+            phone: metadata.phone || null,
+            address: null,
+            role: metadata.is_driver_signup ? 'driver' : 'customer',
+            avatar_url: null,
+            created_at: new Date().toISOString(),
+          };
+          setProfile(tempProfile);
+          setFullName(metadata.full_name || '');
+          setPhone(metadata.phone || '');
         }
 
-        // Get driver stats
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const { count: totalDeliveries } = await (supabase as any)
-          .from('deliveries')
-          .select('*', { count: 'exact', head: true })
-          .eq('driver_id', user.id);
+        // Get driver stats (only if profile exists with driver role)
+        if (profileData?.role === 'driver') {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const { count: totalDeliveries } = await (supabase as any)
+            .from('deliveries')
+            .select('*', { count: 'exact', head: true })
+            .eq('driver_id', user.id);
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const { count: completedDeliveries } = await (supabase as any)
-          .from('deliveries')
-          .select('*', { count: 'exact', head: true })
-          .eq('driver_id', user.id)
-          .eq('status', 'delivered');
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const { count: completedDeliveries } = await (supabase as any)
+            .from('deliveries')
+            .select('*', { count: 'exact', head: true })
+            .eq('driver_id', user.id)
+            .eq('status', 'delivered');
 
-        setStats(prev => ({
-          ...prev,
-          totalDeliveries: totalDeliveries || 0,
-          completedDeliveries: completedDeliveries || 0,
-        }));
+          setStats(prev => ({
+            ...prev,
+            totalDeliveries: totalDeliveries || 0,
+            completedDeliveries: completedDeliveries || 0,
+          }));
+        }
       }
       setLoading(false);
     };
@@ -113,24 +131,42 @@ export default function ProfilePage() {
   const handleSave = async () => {
     setSaving(true);
     const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+      setSaving(false);
+      return;
+    }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { error } = await (supabase as any)
       .from('profiles')
-      .update({
+      .upsert({
+        user_id: user.id,
         full_name: fullName,
         phone: phone,
         address: address,
+        role: profile?.role || 'customer',
         updated_at: new Date().toISOString(),
-      })
-      .eq('user_id', profile?.user_id);
+      }, {
+        onConflict: 'user_id'
+      });
 
     setSaving(false);
 
     if (!error) {
       setSaved(true);
       setEditing(false);
-      setProfile(prev => prev ? { ...prev, full_name: fullName, phone, address } : null);
+      setProfile(prev => prev ? { ...prev, full_name: fullName, phone, address } : {
+        id: '',
+        user_id: user.id,
+        full_name: fullName,
+        phone: phone,
+        address: address,
+        role: 'customer',
+        avatar_url: null,
+        created_at: new Date().toISOString(),
+      });
       setTimeout(() => setSaved(false), 3000);
     }
   };
