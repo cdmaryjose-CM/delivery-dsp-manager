@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import type { User } from '@supabase/supabase-js';
@@ -11,7 +12,6 @@ import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import {
   Bell,
   Search,
-  Menu,
   LogOut,
   User as UserIcon,
   Settings,
@@ -34,7 +34,6 @@ export function DashboardHeader({ user, profile }: HeaderProps) {
   const t = useTranslations('dashboard');
   const router = useRouter();
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const handleSignOut = async () => {
     const supabase = createClient();
@@ -58,15 +57,23 @@ export function DashboardHeader({ user, profile }: HeaderProps) {
   return (
     <header className="sticky top-0 z-40 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
       <div className="flex items-center justify-between h-16 px-4 lg:px-8">
-        {/* Left side - Mobile menu + Search */}
+        {/* Left side - Logo + Search */}
         <div className="flex items-center gap-4">
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+          {/* Logo - Link to home */}
+          <Link
+            href="/"
+            className="lg:hidden flex items-center"
           >
-            <Menu className="w-6 h-6 text-gray-600 dark:text-gray-300" />
-          </button>
+            <div className="bg-white/50 dark:bg-white/10 backdrop-blur-sm rounded-lg p-1 border border-gray-200 dark:border-white/20 hover:bg-white/70 dark:hover:bg-white/20 transition-colors">
+              <Image
+                src="/logo_amall.PNG"
+                alt="AUTOS MALL"
+                width={80}
+                height={44}
+                className="object-contain h-8 w-auto"
+              />
+            </div>
+          </Link>
 
           {/* Search */}
           <div className="hidden sm:flex items-center">
