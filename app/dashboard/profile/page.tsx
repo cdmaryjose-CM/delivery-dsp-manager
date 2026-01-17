@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import {
   User,
@@ -61,6 +62,9 @@ export default function ProfilePage() {
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -83,6 +87,7 @@ export default function ProfilePage() {
           setFullName(profileData.full_name || '');
           setPhone(profileData.phone || '');
           setAddress(profileData.address || '');
+          setAvatarUrl(profileData.avatar_url || null);
         } else {
           // No profile exists, use metadata from auth
           const tempProfile: Profile = {
@@ -178,6 +183,81 @@ export default function ProfilePage() {
     setEditing(false);
   };
 
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      alert('Por favor selecciona una imagen');
+      return;
+    }
+
+    // Validate file size (max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+      alert('La imagen debe ser menor a 2MB');
+      return;
+    }
+
+    setUploadingAvatar(true);
+
+    try {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (!user) {
+        setUploadingAvatar(false);
+        return;
+      }
+
+      // Create unique file name
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${user.id}/avatar.${fileExt}`;
+
+      // Upload to Supabase Storage
+      const { error: uploadError } = await supabase.storage
+        .from('avatars')
+        .upload(fileName, file, { upsert: true });
+
+      if (uploadError) {
+        console.error('Upload error:', uploadError);
+        alert('Error al subir la imagen');
+        setUploadingAvatar(false);
+        return;
+      }
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('avatars')
+        .getPublicUrl(fileName);
+
+      // Update profile with avatar URL
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (supabase as any)
+        .from('profiles')
+        .upsert({
+          user_id: user.id,
+          avatar_url: publicUrl,
+          updated_at: new Date().toISOString(),
+        }, {
+          onConflict: 'user_id'
+        });
+
+      setAvatarUrl(publicUrl);
+      setProfile(prev => prev ? { ...prev, avatar_url: publicUrl } : null);
+
+    } catch (error) {
+      console.error('Avatar upload error:', error);
+      alert('Error al subir la imagen');
+    } finally {
+      setUploadingAvatar(false);
+      // Reset input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
@@ -223,11 +303,36 @@ export default function ProfilePage() {
           <div className="flex flex-col sm:flex-row sm:items-end gap-4 -mt-12">
             {/* Avatar */}
             <div className="relative">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-am-navy to-am-orange flex items-center justify-center text-white text-3xl font-bold border-4 border-white dark:border-gray-800 shadow-lg">
-                {fullName ? fullName.charAt(0).toUpperCase() : 'U'}
-              </div>
-              <button className="absolute bottom-0 right-0 p-2 bg-am-navy dark:bg-am-orange rounded-full text-white hover:scale-110 transition-transform shadow-md">
-                <Camera className="w-4 h-4" />
+              {avatarUrl ? (
+                <Image
+                  src={avatarUrl}
+                  alt="Avatar"
+                  width={96}
+                  height={96}
+                  className="w-24 h-24 rounded-full object-cover border-4 border-white dark:border-gray-800 shadow-lg"
+                />
+              ) : (
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-am-navy to-am-orange flex items-center justify-center text-white text-3xl font-bold border-4 border-white dark:border-gray-800 shadow-lg">
+                  {fullName ? fullName.charAt(0).toUpperCase() : 'U'}
+                </div>
+              )}
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleAvatarUpload}
+                accept="image/*"
+                className="hidden"
+              />
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploadingAvatar}
+                className="absolute bottom-0 right-0 p-2 bg-am-navy dark:bg-am-orange rounded-full text-white hover:scale-110 transition-transform shadow-md disabled:opacity-50"
+              >
+                {uploadingAvatar ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Camera className="w-4 h-4" />
+                )}
               </button>
             </div>
 
