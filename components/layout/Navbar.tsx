@@ -1,16 +1,144 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { createClient } from '@/lib/supabase/client';
+import type { User } from '@supabase/supabase-js';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
-import { Menu, X, Truck, LogIn, Phone } from 'lucide-react';
+import {
+  Menu,
+  X,
+  Truck,
+  LogIn,
+  Phone,
+  ChevronDown,
+  LayoutDashboard,
+  User as UserIcon,
+  Settings,
+  LogOut,
+} from 'lucide-react';
+
+interface Profile {
+  full_name: string | null;
+  role: string;
+  avatar_url: string | null;
+}
 
 export const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [loading, setLoading] = useState(true);
   const t = useTranslations('navigation');
+  const router = useRouter();
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    const checkAuth = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        setUser(user);
+
+        // Get profile
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const { data: profileData } = await (supabase as any)
+          .from('profiles')
+          .select('full_name, role, avatar_url')
+          .eq('user_id', user.id)
+          .single();
+
+        if (profileData) {
+          setProfile(profileData);
+        } else {
+          // Use metadata if no profile
+          setProfile({
+            full_name: user.user_metadata?.full_name || null,
+            role: user.user_metadata?.is_driver_signup ? 'driver' : 'customer',
+            avatar_url: null,
+          });
+        }
+      } else {
+        setUser(null);
+        setProfile(null);
+      }
+      setLoading(false);
+    };
+
+    checkAuth();
+
+    // Listen for auth changes (login/logout)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'INITIAL_SESSION') && session?.user) {
+          setUser(session.user);
+
+          // Get profile
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const { data: profileData } = await (supabase as any)
+            .from('profiles')
+            .select('full_name, role, avatar_url')
+            .eq('user_id', session.user.id)
+            .single();
+
+          if (profileData) {
+            setProfile(profileData);
+          } else {
+            setProfile({
+              full_name: session.user.user_metadata?.full_name || null,
+              role: session.user.user_metadata?.is_driver_signup ? 'driver' : 'customer',
+              avatar_url: null,
+            });
+          }
+          setLoading(false);
+        } else if (event === 'SIGNED_OUT') {
+          setUser(null);
+          setProfile(null);
+          setLoading(false);
+        }
+      }
+    );
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    setUser(null);
+    setProfile(null);
+    setShowUserMenu(false);
+    router.push('/');
+    router.refresh();
+  };
+
+  const getUserInitial = () => {
+    if (profile?.full_name) {
+      return profile.full_name.charAt(0).toUpperCase();
+    }
+    if (user?.email) {
+      return user.email.charAt(0).toUpperCase();
+    }
+    return 'U';
+  };
+
+  const getRoleBadge = (role: string) => {
+    const badges: Record<string, { label: string; color: string }> = {
+      admin: { label: 'Admin', color: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' },
+      dispatcher: { label: 'Dispatcher', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' },
+      driver: { label: 'Driver', color: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' },
+      customer: { label: 'Customer', color: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300' },
+    };
+    return badges[role] || badges.customer;
+  };
 
   return (
     <nav className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-lg sticky top-0 z-40 transition-colors duration-300 border-b border-gray-200/50 dark:border-slate-700/50">
@@ -57,11 +185,11 @@ export const Navbar: React.FC = () => {
               {t('contact')}
             </Link>
             <a
-              href="tel:+19547954030"
+              href="tel:+13466971041"
               className="flex items-center gap-1.5 px-3 py-1.5 bg-am-green/10 dark:bg-am-green/20 text-am-green rounded-full text-sm font-medium hover:bg-am-green/20 dark:hover:bg-am-green/30 transition-colors"
             >
               <Phone className="w-3.5 h-3.5" />
-              (954) 795-4030
+              (346) 697-1041
             </a>
           </div>
 
@@ -72,21 +200,114 @@ export const Navbar: React.FC = () => {
               <ThemeToggle />
             </div>
 
-            {/* Auth Buttons */}
-            <Link
-              href="/login"
-              className="hidden md:flex items-center gap-2 px-4 py-2 text-gray-600 dark:text-gray-300 hover:text-am-navy dark:hover:text-am-orange font-medium text-sm transition-colors"
-            >
-              <LogIn className="w-4 h-4" />
-              Login
-            </Link>
-            <Link
-              href="/register?role=driver"
-              className="hidden md:flex items-center gap-2 px-4 py-2 bg-am-orange text-white rounded-lg font-medium text-sm hover:bg-am-orange-light transition-colors"
-            >
-              <Truck className="w-4 h-4" />
-              Join as Driver
-            </Link>
+            {/* Auth Section */}
+            {!loading && (
+              <>
+                {user ? (
+                  /* Logged In - User Menu */
+                  <div className="relative hidden md:block">
+                    <button
+                      onClick={() => setShowUserMenu(!showUserMenu)}
+                      className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      {profile?.avatar_url ? (
+                        <Image
+                          src={profile.avatar_url}
+                          alt="Avatar"
+                          width={32}
+                          height={32}
+                          className="w-8 h-8 rounded-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-8 h-8 rounded-full bg-am-navy flex items-center justify-center text-white text-sm font-semibold">
+                          {getUserInitial()}
+                        </div>
+                      )}
+                      <div className="text-left">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white">
+                          {profile?.full_name || 'Usuario'}
+                        </p>
+                        <span className={`text-xs px-1.5 py-0.5 rounded ${getRoleBadge(profile?.role || 'customer').color}`}>
+                          {getRoleBadge(profile?.role || 'customer').label}
+                        </span>
+                      </div>
+                      <ChevronDown className="w-4 h-4 text-gray-400" />
+                    </button>
+
+                    {/* Dropdown Menu */}
+                    {showUserMenu && (
+                      <>
+                        <div
+                          className="fixed inset-0 z-40"
+                          onClick={() => setShowUserMenu(false)}
+                        />
+                        <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
+                          <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                            <p className="text-sm font-medium text-gray-900 dark:text-white">
+                              {profile?.full_name || 'Usuario'}
+                            </p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                              {user.email}
+                            </p>
+                          </div>
+                          <Link
+                            href="/dashboard"
+                            onClick={() => setShowUserMenu(false)}
+                            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          >
+                            <LayoutDashboard className="w-4 h-4" />
+                            Mi Progreso
+                          </Link>
+                          <Link
+                            href="/dashboard/profile"
+                            onClick={() => setShowUserMenu(false)}
+                            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          >
+                            <UserIcon className="w-4 h-4" />
+                            Mi Perfil
+                          </Link>
+                          <Link
+                            href="/dashboard/settings"
+                            onClick={() => setShowUserMenu(false)}
+                            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          >
+                            <Settings className="w-4 h-4" />
+                            Configuración
+                          </Link>
+                          <div className="border-t border-gray-200 dark:border-gray-700 mt-1 pt-1">
+                            <button
+                              onClick={handleSignOut}
+                              className="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20"
+                            >
+                              <LogOut className="w-4 h-4" />
+                              Cerrar Sesión
+                            </button>
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  /* Not Logged In - Auth Buttons */
+                  <>
+                    <Link
+                      href="/login"
+                      className="hidden md:flex items-center gap-2 px-4 py-2 text-gray-600 dark:text-gray-300 hover:text-am-navy dark:hover:text-am-orange font-medium text-sm transition-colors"
+                    >
+                      <LogIn className="w-4 h-4" />
+                      Login
+                    </Link>
+                    <Link
+                      href="/register?role=driver"
+                      className="hidden md:flex items-center gap-2 px-4 py-2 bg-am-orange text-white rounded-lg font-medium text-sm hover:bg-am-orange-light transition-colors"
+                    >
+                      <Truck className="w-4 h-4" />
+                      Join as Driver
+                    </Link>
+                  </>
+                )}
+              </>
+            )}
 
             {/* Mobile Menu Button */}
             <button
@@ -136,11 +357,11 @@ export const Navbar: React.FC = () => {
                 {t('contact')}
               </Link>
               <a
-                href="tel:+19547954030"
+                href="tel:+13466971041"
                 className="mx-4 flex items-center justify-center gap-2 px-4 py-2.5 bg-am-green/10 dark:bg-am-green/20 text-am-green rounded-lg font-medium text-sm hover:bg-am-green/20 dark:hover:bg-am-green/30 transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                (954) 795-4030
+                (346) 697-1041
               </a>
 
               <div className="flex items-center space-x-2 px-4 pt-2">
@@ -148,23 +369,95 @@ export const Navbar: React.FC = () => {
                 <ThemeToggle />
               </div>
 
-              <Link
-                href="/login"
-                className="mx-4 flex items-center justify-center gap-2 px-4 py-2 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-lg font-medium text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <LogIn className="w-4 h-4" />
-                Login
-              </Link>
-
-              <Link
-                href="/register?role=driver"
-                className="mx-4 flex items-center justify-center gap-2 px-4 py-2 bg-am-orange text-white rounded-lg font-medium text-sm hover:bg-am-orange-light transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <Truck className="w-4 h-4" />
-                Join as Driver
-              </Link>
+              {/* Mobile Auth Section */}
+              {!loading && (
+                <>
+                  {user ? (
+                    /* Logged In - Mobile */
+                    <>
+                      <div className="mx-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          {profile?.avatar_url ? (
+                            <Image
+                              src={profile.avatar_url}
+                              alt="Avatar"
+                              width={40}
+                              height={40}
+                              className="w-10 h-10 rounded-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-10 h-10 rounded-full bg-am-navy flex items-center justify-center text-white font-semibold">
+                              {getUserInitial()}
+                            </div>
+                          )}
+                          <div>
+                            <p className="font-medium text-gray-900 dark:text-white">
+                              {profile?.full_name || 'Usuario'}
+                            </p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                              {user.email}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <Link
+                        href="/dashboard"
+                        className="mx-4 flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <LayoutDashboard className="w-4 h-4" />
+                        Mi Progreso
+                      </Link>
+                      <Link
+                        href="/dashboard/profile"
+                        className="mx-4 flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <UserIcon className="w-4 h-4" />
+                        Mi Perfil
+                      </Link>
+                      <Link
+                        href="/dashboard/settings"
+                        className="mx-4 flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <Settings className="w-4 h-4" />
+                        Configuración
+                      </Link>
+                      <button
+                        onClick={() => {
+                          handleSignOut();
+                          setIsMenuOpen(false);
+                        }}
+                        className="mx-4 flex items-center gap-2 px-4 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Cerrar Sesión
+                      </button>
+                    </>
+                  ) : (
+                    /* Not Logged In - Mobile */
+                    <>
+                      <Link
+                        href="/login"
+                        className="mx-4 flex items-center justify-center gap-2 px-4 py-2 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-lg font-medium text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <LogIn className="w-4 h-4" />
+                        Login
+                      </Link>
+                      <Link
+                        href="/register?role=driver"
+                        className="mx-4 flex items-center justify-center gap-2 px-4 py-2 bg-am-orange text-white rounded-lg font-medium text-sm hover:bg-am-orange-light transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <Truck className="w-4 h-4" />
+                        Join as Driver
+                      </Link>
+                    </>
+                  )}
+                </>
+              )}
             </div>
           </div>
         )}
